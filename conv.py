@@ -2,15 +2,22 @@
 from PIL import Image
 import os, sys
 
-basewidth = 512
+maxSize = 512
 i = 0
 
 for filename in os.listdir(os.path.dirname(os.path.abspath(__file__))):
 	if filename.endswith(".jpg"):
 		img = Image.open(filename)
-		wpercent = (basewidth/float(img.size[0]))
-		hsize = int((float(img.size[1])*float(wpercent)))
-		img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+		
+		if img.size[0]>=img.size[1]:
+			wpercent = (maxSize/float(img.size[0]))
+			hsize = int((float(img.size[1])*float(wpercent)))
+			img = img.resize((maxSize,hsize), Image.ANTIALIAS)
+		else:
+			wpercent = (maxSize/float(img.size[1]))
+			hsize = int((float(img.size[0])*float(wpercent)))
+			img = img.resize((maxSize,hsize), Image.ANTIALIAS)
+			
 		img.save(str(i)+'.png') 
-		os.remove(filename)
+		#os.remove(filename)
 		i += 1
