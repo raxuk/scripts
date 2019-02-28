@@ -1,3 +1,4 @@
+'''Script para modificar tamaño y extensión de varios archivos en la carpeta donde se ejecuta'''
 from PIL import Image
 import os, sys
 
